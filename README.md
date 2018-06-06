@@ -10,7 +10,7 @@ See `src/example-socket-client.py` for an example on how to use the API. The que
 
 # REST server
 
-The REST server supports all Node queries automatically as the Protobuffer definition is updated. Since Protobuffer has a canonical JSON representation, the protobuf documentation linked above can be used to construct REST queries and parse responses. 
+The REST server supports all Node queries automatically as the Protobuffer definition is updated. Since Protobuffer has a canonical JSON representation, the protobuf documentation linked above can be used to construct REST queries and parse responses.
 
 Clients should create POST requests with a JSON body for the request. GET queries will be supported in the future. The response is JSON as well.
 
@@ -41,6 +41,5 @@ To override the default REST server settings, create a file `config.json` with t
 When the protobuffer definition has changed, perform the following steps to fetch the latest version and generate a new core_pb2.py file:
 
 ```
-git submodule foreach git pull origin master
-./protobuf-py.sh
+scripts/protobuf-py.sh
 ```
