@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='core.proto',
   package='nano.api',
   syntax='proto3',
-  serialized_pb=_b('\n\ncore.proto\x12\x08nano.api\x1a\x1egoogle/protobuf/wrappers.proto\"*\n\x05query\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.nano.api.QueryType\"r\n\x08response\x12 \n\x06result\x18\x01 \x01(\x0e\x32\x10.nano.api.Result\x12!\n\x04type\x18\x02 \x01(\x0e\x32\x13.nano.api.QueryType\x12\r\n\x05\x65rror\x18\x03 \x01(\t\x12\x12\n\nerror_code\x18\x04 \x01(\x11\"S\n\x14query_client_connect\x12\x13\n\x0b\x61pi_version\x18\x01 \x01(\r\x12\x15\n\rapi_client_id\x18\x02 \x01(\t\x12\x0f\n\x07\x61pi_key\x18\x03 \x01(\t\"a\n\x12res_client_connect\x12\x13\n\x0b\x61pi_version\x18\x01 \x01(\r\x12\x1a\n\x12node_version_major\x18\x02 \x01(\r\x12\x1a\n\x12node_version_patch\x18\x03 \x01(\r\"\x18\n\nquery_ping\x12\n\n\x02id\x18\x01 \x01(\r\"\x16\n\x08res_ping\x12\n\n\x02id\x18\x01 \x01(\r\"i\n\x15query_account_pending\x12\x10\n\x08\x61\x63\x63ounts\x18\x01 \x03(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\x12/\n\tthreshold\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"A\n\x13res_account_pending\x12*\n\x07pending\x18\x01 \x03(\x0b\x32\x19.nano.api.account_pending\"\\\n\x0f\x61\x63\x63ount_pending\x12\x0f\n\x07\x61\x63\x63ount\x18\x01 \x01(\t\x12\x38\n\nblock_info\x18\x02 \x03(\x0b\x32$.nano.api.account_pending_block_info\"J\n\x1a\x61\x63\x63ount_pending_block_info\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x0e\n\x06\x61mount\x18\x02 \x01(\t\x12\x0e\n\x06source\x18\x03 \x01(\t*{\n\tQueryType\x12\n\n\x06UNKOWN\x10\x00\x12\x15\n\x11REGISTER_CALLBACK\x10\x01\x12\x08\n\x04PING\x10\x02\x12\x13\n\x0f\x41\x43\x43OUNT_BALANCE\x10\x03\x12\x17\n\x13\x41\x43\x43OUNT_BLOCK_COUNT\x10\x04\x12\x13\n\x0f\x41\x43\x43OUNT_PENDING\x10\x05*D\n\x06Result\x12\x06\n\x02OK\x10\x00\x12\x11\n\rGENERIC_ERROR\x10\x01\x12\x11\n\rINVALID_INPUT\x10\x02\x12\x0c\n\x08IO_ERROR\x10\x03\x62\x06proto3')
+  serialized_pb=_b('\n\ncore.proto\x12\x08nano.api\x1a\x1egoogle/protobuf/wrappers.proto\"*\n\x05query\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.nano.api.QueryType\"r\n\x08response\x12 \n\x06result\x18\x01 \x01(\x0e\x32\x10.nano.api.Result\x12!\n\x04type\x18\x02 \x01(\x0e\x32\x13.nano.api.QueryType\x12\r\n\x05\x65rror\x18\x03 \x01(\t\x12\x12\n\nerror_code\x18\x04 \x01(\x11\"S\n\x14query_client_connect\x12\x13\n\x0b\x61pi_version\x18\x01 \x01(\r\x12\x15\n\rapi_client_id\x18\x02 \x01(\t\x12\x0f\n\x07\x61pi_key\x18\x03 \x01(\t\"a\n\x12res_client_connect\x12\x13\n\x0b\x61pi_version\x18\x01 \x01(\r\x12\x1a\n\x12node_version_major\x18\x02 \x01(\r\x12\x1a\n\x12node_version_patch\x18\x03 \x01(\r\"\x18\n\nquery_ping\x12\n\n\x02id\x18\x01 \x01(\r\"\x16\n\x08res_ping\x12\n\n\x02id\x18\x01 \x01(\r\"y\n\x15query_account_pending\x12\x10\n\x08\x61\x63\x63ounts\x18\x01 \x03(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\x12\x0e\n\x06source\x18\x03 \x01(\x08\x12/\n\tthreshold\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"A\n\x13res_account_pending\x12*\n\x07pending\x18\x01 \x03(\x0b\x32\x19.nano.api.account_pending\"\\\n\x0f\x61\x63\x63ount_pending\x12\x0f\n\x07\x61\x63\x63ount\x18\x01 \x01(\t\x12\x38\n\nblock_info\x18\x02 \x03(\x0b\x32$.nano.api.account_pending_block_info\"J\n\x1a\x61\x63\x63ount_pending_block_info\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x0e\n\x06\x61mount\x18\x02 \x01(\t\x12\x0e\n\x06source\x18\x03 \x01(\t*{\n\tQueryType\x12\n\n\x06UNKOWN\x10\x00\x12\x15\n\x11REGISTER_CALLBACK\x10\x01\x12\x08\n\x04PING\x10\x02\x12\x13\n\x0f\x41\x43\x43OUNT_BALANCE\x10\x03\x12\x17\n\x13\x41\x43\x43OUNT_BLOCK_COUNT\x10\x04\x12\x13\n\x0f\x41\x43\x43OUNT_PENDING\x10\x05*D\n\x06Result\x12\x06\n\x02OK\x10\x00\x12\x11\n\rGENERIC_ERROR\x10\x01\x12\x11\n\rINVALID_INPUT\x10\x02\x12\x0c\n\x08IO_ERROR\x10\x03\x62\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -58,8 +58,8 @@ _QUERYTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=794,
-  serialized_end=917,
+  serialized_start=810,
+  serialized_end=933,
 )
 _sym_db.RegisterEnumDescriptor(_QUERYTYPE)
 
@@ -89,8 +89,8 @@ _RESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=919,
-  serialized_end=987,
+  serialized_start=935,
+  serialized_end=1003,
 )
 _sym_db.RegisterEnumDescriptor(_RESULT)
 
@@ -365,8 +365,15 @@ _QUERY_ACCOUNT_PENDING = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='threshold', full_name='nano.api.query_account_pending.threshold', index=2,
-      number=3, type=11, cpp_type=10, label=1,
+      name='source', full_name='nano.api.query_account_pending.source', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='threshold', full_name='nano.api.query_account_pending.threshold', index=3,
+      number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -384,7 +391,7 @@ _QUERY_ACCOUNT_PENDING = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=450,
-  serialized_end=555,
+  serialized_end=571,
 )
 
 
@@ -414,8 +421,8 @@ _RES_ACCOUNT_PENDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=557,
-  serialized_end=622,
+  serialized_start=573,
+  serialized_end=638,
 )
 
 
@@ -452,8 +459,8 @@ _ACCOUNT_PENDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=624,
-  serialized_end=716,
+  serialized_start=640,
+  serialized_end=732,
 )
 
 
@@ -497,8 +504,8 @@ _ACCOUNT_PENDING_BLOCK_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=718,
-  serialized_end=792,
+  serialized_start=734,
+  serialized_end=808,
 )
 
 _QUERY.fields_by_name['type'].enum_type = _QUERYTYPE
