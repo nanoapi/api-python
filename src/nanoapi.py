@@ -26,12 +26,16 @@ class Client:
 
         # Get enum value and send query
         query_id = getattr(Model, undecorated.upper())
-        res = self.conn.send_query(query_id, query_object)
-
-        # Create result object
-        res_obj = getattr(Model, 'res_' + undecorated.lower())()
-        res_obj.ParseFromString(res)
-        return res_obj
+        error, res = self.conn.send_query(query_id, query_object)
+        if error is None:
+            # Create result object
+            res_obj = getattr(Model, 'res_' + undecorated.lower())()
+            res_obj.ParseFromString(res)
+            return res_obj
+        else:
+            err_obj = Model.response()
+            err_obj.ParseFromString(error)
+            return err_obj
 
     def to_json(self, obj):
         """Convert the protobuf object to JSON"""
@@ -41,6 +45,13 @@ class Client:
         """Create a query_<query_name> protobuf object and parse the supplied JSON into it"""
         query_obj = getattr(Model, 'query_' + query_name.lower())()
         return Parse(json, query_obj)
+
+    def error_response_from_exception(self, ex):
+        err_obj = Model.response()
+        err_obj.result = Model.GENERIC_ERROR
+        err_obj.error_code = 1
+        err_obj.error = str(ex)
+        return err_obj
 
 class SocketConnection:
     """TCP or domain socket connection to the IPC server"""
@@ -87,7 +98,7 @@ class SocketConnection:
         self.sock.sendall(packed_heading)
         self.sock.sendall(packed_query)
 
-        # Get response
+        # Get response header
         response_buf = self.recvall(self.sock, 4)
         header_len = struct.unpack('>i', response_buf[:4])[0]
         #print >> sys.stderr, "Got response header length: %d " % header_len
@@ -98,14 +109,21 @@ class SocketConnection:
         response.ParseFromString(response_buf);
         #print >> sys.stderr, "Got response type: %d " % response.type
 
-        # Length of response
-        response_buf = bytes('','utf-8')
-        while len(response_buf) < 4:
-            response_buf += self.sock.recv(1)
-        header_len = struct.unpack('>i', response_buf[:4])[0]
+        # TODO: deal with errors
+        if response.result == Model.OK:
+            print ("All ok")
 
-        # Response
-        response_buf = bytes('','utf-8')
-        while len(response_buf) < header_len:
-            response_buf += self.sock.recv(1)
-        return response_buf
+            # Length of response
+            response_buf = bytes('','utf-8')
+            while len(response_buf) < 4:
+                response_buf += self.sock.recv(1)
+            header_len = struct.unpack('>i', response_buf[:4])[0]
+
+            # Response
+            response_buf = bytes('','utf-8')
+            while len(response_buf) < header_len:
+                response_buf += self.sock.recv(1)
+            return None, response_buf
+        else:
+            print ("Some error")
+            return response_buf, None

@@ -12,9 +12,13 @@ global nano
 
 @app.route('/api/<query>', methods=['POST'])
 def api(query):
-    query_obj = nano.from_json(query, request.data)
-    res = nano.query(query_obj)
-    return nano.to_json(res)
+
+    try:
+        query_obj = nano.from_json(query, request.data)
+        res = nano.query(query_obj)
+        return nano.to_json(res)
+    except Exception as e:
+        return nano.to_json(nano.error_response_from_exception(e))
 
 if __name__ == '__main__':
 
