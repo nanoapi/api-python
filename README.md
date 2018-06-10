@@ -55,6 +55,18 @@ To override the default REST server settings, create a file `config.json` with t
 
 To connect to the node using tcp, use a connection string like `tcp://host:port`
 
+## Errors
+
+The REST server returns errors in the following format:
+
+```
+{
+    "type": "ACCOUNT_PENDING",
+    "error_code": 4,
+    "error_message": "Bad account number",
+    "error_category": "error_common"
+}
+```
 
 # Development
 

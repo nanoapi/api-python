@@ -6,6 +6,7 @@ import socket
 import sys
 import struct
 import time
+from google.protobuf.message import Message
 import google.protobuf.descriptor_pb2
 from google.protobuf.json_format import MessageToJson, Parse
 from builtins import bytes
@@ -18,6 +19,13 @@ class Client:
     def __init__(self, conn):
         """Initialize client with an IPC connection. The connection object must provide send_query method"""
         self.conn = conn
+
+        # Extract query types
+        #self.query_types = [v for v in  vars(Model).values() if isinstance(v, type) and issubclass(v, Message) and v.__name__.startswith("query_")]
+        #for clazz in self.query_types:
+        #    print (clazz.__name__)
+        #    print (clazz.DESCRIPTOR.fields_by_name.keys())
+        #    print ([f.type for f in clazz.DESCRIPTOR.fields])
 
     def query(self, query_object):
         """Execute query"""
@@ -109,10 +117,7 @@ class SocketConnection:
         response.ParseFromString(response_buf);
         #print >> sys.stderr, "Got response type: %d " % response.type
 
-        # TODO: deal with errors
-        if response.result == Model.OK:
-            print ("All ok")
-
+        if response.error_code == 0:
             # Length of response
             response_buf = bytes('','utf-8')
             while len(response_buf) < 4:
@@ -125,5 +130,4 @@ class SocketConnection:
                 response_buf += self.sock.recv(1)
             return None, response_buf
         else:
-            print ("Some error")
             return response_buf, None
