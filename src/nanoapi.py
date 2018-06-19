@@ -17,24 +17,24 @@ from urllib.parse import urlparse
 class Client:
     """Nano API client"""
     def __init__(self, conn):
-        """Initialize client with an IPC connection. The connection object must provide send_query method"""
+        """Initialize client with an IPC connection. The connection object must provide send_request method"""
         self.conn = conn
 
-        # Extract query types
-        #self.query_types = [v for v in  vars(Model).values() if isinstance(v, type) and issubclass(v, Message) and v.__name__.startswith("query_")]
+        # Extract request types
+        #self.query_types = [v for v in  vars(Model).values() if isinstance(v, type) and issubclass(v, Message) and v.__name__.startswith("req_")]
         #for clazz in self.query_types:
         #    print (clazz.__name__)
         #    print (clazz.DESCRIPTOR.fields_by_name.keys())
         #    print ([f.type for f in clazz.DESCRIPTOR.fields])
 
-    def query(self, query_object):
-        """Execute query"""
-        # Strip off the 'query_' prefix
-        undecorated = type(query_object).__name__[6:]
+    def request(self, req_object):
+        """Send request"""
+        # Strip off the 'req_' prefix
+        undecorated = type(req_object).__name__[4:]
 
-        # Get enum value and send query
-        query_id = getattr(Model, undecorated.upper())
-        error, res = self.conn.send_query(query_id, query_object)
+        # Get enum value and send req
+        req_id = getattr(Model, undecorated.upper())
+        error, res = self.conn.send_request(req_id, req_object)
         if error is None:
             # Create result object
             res_obj = getattr(Model, 'res_' + undecorated.lower())()
@@ -49,16 +49,16 @@ class Client:
         """Convert the protobuf object to JSON"""
         return MessageToJson(obj, preserving_proto_field_name=True, indent=4)
 
-    def from_json(self, query_name, json):
-        """Create a query_<query_name> protobuf object and parse the supplied JSON into it"""
-        query_obj = getattr(Model, 'query_' + query_name.lower())()
-        return Parse(json, query_obj)
+    def from_json(self, req_name, json):
+        """Create a req_<req_name> protobuf object and parse the supplied JSON into it"""
+        req_obj = getattr(Model, 'req_' + req_name.lower())()
+        return Parse(json, req_obj)
 
     def error_response_from_exception(self, ex):
         err_obj = Model.response()
-        err_obj.result = Model.GENERIC_ERROR
         err_obj.error_code = 1
-        err_obj.error = str(ex)
+        err_obj.error_message = str(ex)
+        err_obj.error_category = "exception"
         return err_obj
 
 class SocketConnection:
@@ -93,18 +93,18 @@ class SocketConnection:
             count -= len(newbuf)
         return buf
 
-    def send_query(self, query_type, query):
-        """Serialize query and send via socket, deserialize and return result"""
-        header = Model.query()
-        header.type = query_type
+    def send_request(self, request_type, request):
+        """Serialize request and send via socket, deserialize and return result"""
+        header = Model.request()
+        header.type = request_type
         str_header = header.SerializeToString()
-        str_query = query.SerializeToString()
+        str_request = request.SerializeToString()
 
         # <i is little endian 32-bit
         packed_heading = struct.pack(">i%ds" % (len(str_header),), len(str_header), str_header)
-        packed_query = struct.pack(">i%ds" % (len(str_query),), len(str_query), str_query)
+        packed_request = struct.pack(">i%ds" % (len(str_request),), len(str_request), str_request)
         self.sock.sendall(packed_heading)
-        self.sock.sendall(packed_query)
+        self.sock.sendall(packed_request)
 
         # Get response header
         response_buf = self.recvall(self.sock, 4)

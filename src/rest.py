@@ -15,7 +15,7 @@ def api(query):
 
     try:
         query_obj = nano.from_json(query, request.data)
-        res = nano.query(query_obj)
+        res = nano.request(query_obj)
         return nano.to_json(res)
     except Exception as e:
         return nano.to_json(nano.error_response_from_exception(e))

@@ -5,7 +5,7 @@ conn = SocketConnection('local:///tmp/nano')
 #conn = SocketConnection('tcp://localhost:7077')
 nano = Client(conn)
 
-pending = Model.query_account_pending();
+pending = Model.req_account_pending();
 pending.threshold.value = "200000000000000000000000";
 pending.accounts.append("xrb_16u1uufyoig8777y6r8iqjtrw8sg8maqrm36zzcm95jmbd9i9aj5i8abr8u5");
 pending.accounts.append("xrb_3eff1rokrp4ryronxpjdhzijxt9oax117xtn3eaqcaxcemp6y6fkarpqq8wj");
@@ -14,7 +14,7 @@ pending.accounts.append("xrb_3eff1rokrp4ryronxpjdhzijxt9oax117xtn3eaqcaxcemp6y6f
 print (nano.to_json(pending))
 
 # Call the Node
-res = nano.query(pending)
+res = nano.request(pending)
 
 # Print the response as JSON
 print ("Response:")

@@ -21,13 +21,13 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='core.proto',
   package='nano.api',
   syntax='proto3',
-  serialized_pb=_b('\n\ncore.proto\x12\x08nano.api\x1a\x1egoogle/protobuf/wrappers.proto\"*\n\x05query\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.nano.api.QueryType\"p\n\x08response\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.nano.api.QueryType\x12\x12\n\nerror_code\x18\x02 \x01(\x11\x12\x15\n\rerror_message\x18\x03 \x01(\t\x12\x16\n\x0e\x65rror_category\x18\x04 \x01(\t\"S\n\x14query_client_connect\x12\x13\n\x0b\x61pi_version\x18\x01 \x01(\r\x12\x15\n\rapi_client_id\x18\x02 \x01(\t\x12\x0f\n\x07\x61pi_key\x18\x03 \x01(\t\"a\n\x12res_client_connect\x12\x13\n\x0b\x61pi_version\x18\x01 \x01(\r\x12\x1a\n\x12node_version_major\x18\x02 \x01(\r\x12\x1a\n\x12node_version_patch\x18\x03 \x01(\r\"\x18\n\nquery_ping\x12\n\n\x02id\x18\x01 \x01(\r\"\x16\n\x08res_ping\x12\n\n\x02id\x18\x01 \x01(\r\"y\n\x15query_account_pending\x12\x10\n\x08\x61\x63\x63ounts\x18\x01 \x03(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\x12\x0e\n\x06source\x18\x03 \x01(\x08\x12/\n\tthreshold\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"A\n\x13res_account_pending\x12*\n\x07pending\x18\x01 \x03(\x0b\x32\x19.nano.api.account_pending\"\\\n\x0f\x61\x63\x63ount_pending\x12\x0f\n\x07\x61\x63\x63ount\x18\x01 \x01(\t\x12\x38\n\nblock_info\x18\x02 \x03(\x0b\x32$.nano.api.account_pending_block_info\"J\n\x1a\x61\x63\x63ount_pending_block_info\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x0e\n\x06\x61mount\x18\x02 \x01(\t\x12\x0e\n\x06source\x18\x03 \x01(\t*{\n\tQueryType\x12\n\n\x06UNKOWN\x10\x00\x12\x15\n\x11REGISTER_CALLBACK\x10\x01\x12\x08\n\x04PING\x10\x02\x12\x13\n\x0f\x41\x43\x43OUNT_BALANCE\x10\x03\x12\x17\n\x13\x41\x43\x43OUNT_BLOCK_COUNT\x10\x04\x12\x13\n\x0f\x41\x43\x43OUNT_PENDING\x10\x05\x62\x06proto3')
+  serialized_pb=_b('\n\ncore.proto\x12\x08nano.api\x1a\x1egoogle/protobuf/wrappers.proto\".\n\x07request\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\"r\n\x08response\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\x12\x12\n\nerror_code\x18\x02 \x01(\x11\x12\x15\n\rerror_message\x18\x03 \x01(\t\x12\x16\n\x0e\x65rror_category\x18\x04 \x01(\t\"%\n\x12req_client_connect\x12\x0f\n\x07\x61pi_key\x18\x01 \x01(\t\".\n\x12res_client_connect\x12\x18\n\x10\x61pi_key_accepted\x18\x01 \x01(\x08\"\x16\n\x08req_ping\x12\n\n\x02id\x18\x01 \x01(\r\"\x16\n\x08res_ping\x12\n\n\x02id\x18\x01 \x01(\r\"w\n\x13req_account_pending\x12\x10\n\x08\x61\x63\x63ounts\x18\x01 \x03(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\x12\x0e\n\x06source\x18\x03 \x01(\x08\x12/\n\tthreshold\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"A\n\x13res_account_pending\x12*\n\x07pending\x18\x01 \x03(\x0b\x32\x19.nano.api.account_pending\"\\\n\x0f\x61\x63\x63ount_pending\x12\x0f\n\x07\x61\x63\x63ount\x18\x01 \x01(\t\x12\x38\n\nblock_info\x18\x02 \x03(\x0b\x32$.nano.api.account_pending_block_info\"J\n\x1a\x61\x63\x63ount_pending_block_info\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x0e\n\x06\x61mount\x18\x02 \x01(\t\x12\x0e\n\x06source\x18\x03 \x01(\t*}\n\x0bRequestType\x12\n\n\x06UNKOWN\x10\x00\x12\x15\n\x11REGISTER_CALLBACK\x10\x01\x12\x08\n\x04PING\x10\x02\x12\x13\n\x0f\x41\x43\x43OUNT_BALANCE\x10\x03\x12\x17\n\x13\x41\x43\x43OUNT_BLOCK_COUNT\x10\x04\x12\x13\n\x0f\x41\x43\x43OUNT_PENDING\x10\x05\x62\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
-_QUERYTYPE = _descriptor.EnumDescriptor(
-  name='QueryType',
-  full_name='nano.api.QueryType',
+_REQUESTTYPE = _descriptor.EnumDescriptor(
+  name='RequestType',
+  full_name='nano.api.RequestType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -58,12 +58,12 @@ _QUERYTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=808,
-  serialized_end=931,
+  serialized_start=713,
+  serialized_end=838,
 )
-_sym_db.RegisterEnumDescriptor(_QUERYTYPE)
+_sym_db.RegisterEnumDescriptor(_REQUESTTYPE)
 
-QueryType = enum_type_wrapper.EnumTypeWrapper(_QUERYTYPE)
+RequestType = enum_type_wrapper.EnumTypeWrapper(_REQUESTTYPE)
 UNKOWN = 0
 REGISTER_CALLBACK = 1
 PING = 2
@@ -73,15 +73,15 @@ ACCOUNT_PENDING = 5
 
 
 
-_QUERY = _descriptor.Descriptor(
-  name='query',
-  full_name='nano.api.query',
+_REQUEST = _descriptor.Descriptor(
+  name='request',
+  full_name='nano.api.request',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='nano.api.query.type', index=0,
+      name='type', full_name='nano.api.request.type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -100,7 +100,7 @@ _QUERY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=56,
-  serialized_end=98,
+  serialized_end=102,
 )
 
 
@@ -151,35 +151,21 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=100,
-  serialized_end=212,
+  serialized_start=104,
+  serialized_end=218,
 )
 
 
-_QUERY_CLIENT_CONNECT = _descriptor.Descriptor(
-  name='query_client_connect',
-  full_name='nano.api.query_client_connect',
+_REQ_CLIENT_CONNECT = _descriptor.Descriptor(
+  name='req_client_connect',
+  full_name='nano.api.req_client_connect',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='api_version', full_name='nano.api.query_client_connect.api_version', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='api_client_id', full_name='nano.api.query_client_connect.api_client_id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='api_key', full_name='nano.api.query_client_connect.api_key', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      name='api_key', full_name='nano.api.req_client_connect.api_key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -196,8 +182,8 @@ _QUERY_CLIENT_CONNECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=214,
-  serialized_end=297,
+  serialized_start=220,
+  serialized_end=257,
 )
 
 
@@ -209,23 +195,9 @@ _RES_CLIENT_CONNECT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='api_version', full_name='nano.api.res_client_connect.api_version', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='node_version_major', full_name='nano.api.res_client_connect.node_version_major', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='node_version_patch', full_name='nano.api.res_client_connect.node_version_patch', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
+      name='api_key_accepted', full_name='nano.api.res_client_connect.api_key_accepted', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
@@ -241,20 +213,20 @@ _RES_CLIENT_CONNECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=299,
-  serialized_end=396,
+  serialized_start=259,
+  serialized_end=305,
 )
 
 
-_QUERY_PING = _descriptor.Descriptor(
-  name='query_ping',
-  full_name='nano.api.query_ping',
+_REQ_PING = _descriptor.Descriptor(
+  name='req_ping',
+  full_name='nano.api.req_ping',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='nano.api.query_ping.id', index=0,
+      name='id', full_name='nano.api.req_ping.id', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -272,8 +244,8 @@ _QUERY_PING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=398,
-  serialized_end=422,
+  serialized_start=307,
+  serialized_end=329,
 )
 
 
@@ -303,41 +275,41 @@ _RES_PING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=424,
-  serialized_end=446,
+  serialized_start=331,
+  serialized_end=353,
 )
 
 
-_QUERY_ACCOUNT_PENDING = _descriptor.Descriptor(
-  name='query_account_pending',
-  full_name='nano.api.query_account_pending',
+_REQ_ACCOUNT_PENDING = _descriptor.Descriptor(
+  name='req_account_pending',
+  full_name='nano.api.req_account_pending',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='accounts', full_name='nano.api.query_account_pending.accounts', index=0,
+      name='accounts', full_name='nano.api.req_account_pending.accounts', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='count', full_name='nano.api.query_account_pending.count', index=1,
+      name='count', full_name='nano.api.req_account_pending.count', index=1,
       number=2, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='source', full_name='nano.api.query_account_pending.source', index=2,
+      name='source', full_name='nano.api.req_account_pending.source', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='threshold', full_name='nano.api.query_account_pending.threshold', index=3,
+      name='threshold', full_name='nano.api.req_account_pending.threshold', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -355,8 +327,8 @@ _QUERY_ACCOUNT_PENDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=448,
-  serialized_end=569,
+  serialized_start=355,
+  serialized_end=474,
 )
 
 
@@ -386,8 +358,8 @@ _RES_ACCOUNT_PENDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=571,
-  serialized_end=636,
+  serialized_start=476,
+  serialized_end=541,
 )
 
 
@@ -424,8 +396,8 @@ _ACCOUNT_PENDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=638,
-  serialized_end=730,
+  serialized_start=543,
+  serialized_end=635,
 )
 
 
@@ -469,34 +441,34 @@ _ACCOUNT_PENDING_BLOCK_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=732,
-  serialized_end=806,
+  serialized_start=637,
+  serialized_end=711,
 )
 
-_QUERY.fields_by_name['type'].enum_type = _QUERYTYPE
-_RESPONSE.fields_by_name['type'].enum_type = _QUERYTYPE
-_QUERY_ACCOUNT_PENDING.fields_by_name['threshold'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_REQUEST.fields_by_name['type'].enum_type = _REQUESTTYPE
+_RESPONSE.fields_by_name['type'].enum_type = _REQUESTTYPE
+_REQ_ACCOUNT_PENDING.fields_by_name['threshold'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _RES_ACCOUNT_PENDING.fields_by_name['pending'].message_type = _ACCOUNT_PENDING
 _ACCOUNT_PENDING.fields_by_name['block_info'].message_type = _ACCOUNT_PENDING_BLOCK_INFO
-DESCRIPTOR.message_types_by_name['query'] = _QUERY
+DESCRIPTOR.message_types_by_name['request'] = _REQUEST
 DESCRIPTOR.message_types_by_name['response'] = _RESPONSE
-DESCRIPTOR.message_types_by_name['query_client_connect'] = _QUERY_CLIENT_CONNECT
+DESCRIPTOR.message_types_by_name['req_client_connect'] = _REQ_CLIENT_CONNECT
 DESCRIPTOR.message_types_by_name['res_client_connect'] = _RES_CLIENT_CONNECT
-DESCRIPTOR.message_types_by_name['query_ping'] = _QUERY_PING
+DESCRIPTOR.message_types_by_name['req_ping'] = _REQ_PING
 DESCRIPTOR.message_types_by_name['res_ping'] = _RES_PING
-DESCRIPTOR.message_types_by_name['query_account_pending'] = _QUERY_ACCOUNT_PENDING
+DESCRIPTOR.message_types_by_name['req_account_pending'] = _REQ_ACCOUNT_PENDING
 DESCRIPTOR.message_types_by_name['res_account_pending'] = _RES_ACCOUNT_PENDING
 DESCRIPTOR.message_types_by_name['account_pending'] = _ACCOUNT_PENDING
 DESCRIPTOR.message_types_by_name['account_pending_block_info'] = _ACCOUNT_PENDING_BLOCK_INFO
-DESCRIPTOR.enum_types_by_name['QueryType'] = _QUERYTYPE
+DESCRIPTOR.enum_types_by_name['RequestType'] = _REQUESTTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-query = _reflection.GeneratedProtocolMessageType('query', (_message.Message,), dict(
-  DESCRIPTOR = _QUERY,
+request = _reflection.GeneratedProtocolMessageType('request', (_message.Message,), dict(
+  DESCRIPTOR = _REQUEST,
   __module__ = 'core_pb2'
-  # @@protoc_insertion_point(class_scope:nano.api.query)
+  # @@protoc_insertion_point(class_scope:nano.api.request)
   ))
-_sym_db.RegisterMessage(query)
+_sym_db.RegisterMessage(request)
 
 response = _reflection.GeneratedProtocolMessageType('response', (_message.Message,), dict(
   DESCRIPTOR = _RESPONSE,
@@ -505,12 +477,12 @@ response = _reflection.GeneratedProtocolMessageType('response', (_message.Messag
   ))
 _sym_db.RegisterMessage(response)
 
-query_client_connect = _reflection.GeneratedProtocolMessageType('query_client_connect', (_message.Message,), dict(
-  DESCRIPTOR = _QUERY_CLIENT_CONNECT,
+req_client_connect = _reflection.GeneratedProtocolMessageType('req_client_connect', (_message.Message,), dict(
+  DESCRIPTOR = _REQ_CLIENT_CONNECT,
   __module__ = 'core_pb2'
-  # @@protoc_insertion_point(class_scope:nano.api.query_client_connect)
+  # @@protoc_insertion_point(class_scope:nano.api.req_client_connect)
   ))
-_sym_db.RegisterMessage(query_client_connect)
+_sym_db.RegisterMessage(req_client_connect)
 
 res_client_connect = _reflection.GeneratedProtocolMessageType('res_client_connect', (_message.Message,), dict(
   DESCRIPTOR = _RES_CLIENT_CONNECT,
@@ -519,12 +491,12 @@ res_client_connect = _reflection.GeneratedProtocolMessageType('res_client_connec
   ))
 _sym_db.RegisterMessage(res_client_connect)
 
-query_ping = _reflection.GeneratedProtocolMessageType('query_ping', (_message.Message,), dict(
-  DESCRIPTOR = _QUERY_PING,
+req_ping = _reflection.GeneratedProtocolMessageType('req_ping', (_message.Message,), dict(
+  DESCRIPTOR = _REQ_PING,
   __module__ = 'core_pb2'
-  # @@protoc_insertion_point(class_scope:nano.api.query_ping)
+  # @@protoc_insertion_point(class_scope:nano.api.req_ping)
   ))
-_sym_db.RegisterMessage(query_ping)
+_sym_db.RegisterMessage(req_ping)
 
 res_ping = _reflection.GeneratedProtocolMessageType('res_ping', (_message.Message,), dict(
   DESCRIPTOR = _RES_PING,
@@ -533,12 +505,12 @@ res_ping = _reflection.GeneratedProtocolMessageType('res_ping', (_message.Messag
   ))
 _sym_db.RegisterMessage(res_ping)
 
-query_account_pending = _reflection.GeneratedProtocolMessageType('query_account_pending', (_message.Message,), dict(
-  DESCRIPTOR = _QUERY_ACCOUNT_PENDING,
+req_account_pending = _reflection.GeneratedProtocolMessageType('req_account_pending', (_message.Message,), dict(
+  DESCRIPTOR = _REQ_ACCOUNT_PENDING,
   __module__ = 'core_pb2'
-  # @@protoc_insertion_point(class_scope:nano.api.query_account_pending)
+  # @@protoc_insertion_point(class_scope:nano.api.req_account_pending)
   ))
-_sym_db.RegisterMessage(query_account_pending)
+_sym_db.RegisterMessage(req_account_pending)
 
 res_account_pending = _reflection.GeneratedProtocolMessageType('res_account_pending', (_message.Message,), dict(
   DESCRIPTOR = _RES_ACCOUNT_PENDING,
