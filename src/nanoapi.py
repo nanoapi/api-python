@@ -78,7 +78,6 @@ class SocketConnection:
                 raise ValueError('Invalid scheme', url.scheme)
         except socket.error as msg:
             print >>sys.stderr, msg
-            sys.exit(1)
 
     def close (self):
         """Close socket connection"""
@@ -95,39 +94,51 @@ class SocketConnection:
 
     def send_request(self, request_type, request):
         """Serialize request and send via socket, deserialize and return result"""
-        header = Model.request()
-        header.type = request_type
-        str_header = header.SerializeToString()
-        str_request = request.SerializeToString()
+        try:
+            # Send preamble
+            preamble = bytearray([ord('N'),0,1,0])
+            self.sock.sendall(preamble)
 
-        # <i is little endian 32-bit
-        packed_heading = struct.pack(">i%ds" % (len(str_header),), len(str_header), str_header)
-        packed_request = struct.pack(">i%ds" % (len(str_request),), len(str_request), str_request)
-        self.sock.sendall(packed_heading)
-        self.sock.sendall(packed_request)
+            # Request header
+            header = Model.request()
+            header.type = request_type
+            str_header = header.SerializeToString()
+            str_request = request.SerializeToString()
 
-        # Get response header
-        response_buf = self.recvall(self.sock, 4)
-        header_len = struct.unpack('>i', response_buf[:4])[0]
-        #print >> sys.stderr, "Got response header length: %d " % header_len
+            # <i is little endian 32-bit
+            packed_heading = struct.pack(">i%ds" % (len(str_header),), len(str_header), str_header)
+            packed_request = struct.pack(">i%ds" % (len(str_request),), len(str_request), str_request)
+            self.sock.sendall(packed_heading)
+            self.sock.sendall(packed_request)
 
-        response_buf = self.recvall(self.sock, header_len)
-
-        response = Model.response();
-        response.ParseFromString(response_buf);
-        #print >> sys.stderr, "Got response type: %d " % response.type
-
-        if response.error_code == 0:
-            # Length of response
-            response_buf = bytes('','utf-8')
-            while len(response_buf) < 4:
-                response_buf += self.sock.recv(1)
+            # Get response header
+            response_buf = self.recvall(self.sock, 4)
             header_len = struct.unpack('>i', response_buf[:4])[0]
+            #print >> sys.stderr, "Got response header length: %d " % header_len
 
-            # Response
-            response_buf = bytes('','utf-8')
-            while len(response_buf) < header_len:
-                response_buf += self.sock.recv(1)
-            return None, response_buf
-        else:
-            return response_buf, None
+            response_buf = self.recvall(self.sock, header_len)
+
+            response = Model.response();
+            response.ParseFromString(response_buf);
+            #print >> sys.stderr, "Got response type: %d " % response.type
+
+            if response.error_code == 0:
+                # Length of response
+                response_buf = bytes('','utf-8')
+                while len(response_buf) < 4:
+                    response_buf += self.sock.recv(1)
+                header_len = struct.unpack('>i', response_buf[:4])[0]
+
+                # Response
+                response_buf = bytes('','utf-8')
+                while len(response_buf) < header_len:
+                    response_buf += self.sock.recv(1)
+                return None, response_buf
+            else:
+                return response_buf, None
+
+        except Exception as msg:
+            response = Model.response()
+            response.error_code = 1
+            response.error_message = str(msg)
+            return response.SerializeToString(), None
