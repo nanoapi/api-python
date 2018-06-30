@@ -96,7 +96,7 @@ class SocketConnection:
         """Serialize request and send via socket, deserialize and return result"""
         try:
             # Send preamble
-            preamble = bytearray([ord('N'),0,1,0])
+            preamble = bytearray([ord('N'),0, Model.VERSION_MAJOR, Model.VERSION_MINOR])
             self.sock.sendall(preamble)
 
             # Request header
@@ -110,6 +110,13 @@ class SocketConnection:
             packed_request = struct.pack(">i%ds" % (len(str_request),), len(str_request), str_request)
             self.sock.sendall(packed_heading)
             self.sock.sendall(packed_request)
+
+            # Get preamble
+            preamble = self.recvall(self.sock, 4)
+            if chr(preamble[0]) != 'N':
+                raise ValueError('Invalid preamble')
+            if int(preamble[2]) > Model.VERSION_MAJOR:
+                raise ValueError('Unsupport API version')
 
             # Get response header
             response_buf = self.recvall(self.sock, 4)

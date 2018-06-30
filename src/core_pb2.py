@@ -21,10 +21,37 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='core.proto',
   package='nano.api',
   syntax='proto3',
-  serialized_pb=_b('\n\ncore.proto\x12\x08nano.api\x1a\x1egoogle/protobuf/wrappers.proto\".\n\x07request\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\"r\n\x08response\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\x12\x12\n\nerror_code\x18\x02 \x01(\x11\x12\x15\n\rerror_message\x18\x03 \x01(\t\x12\x16\n\x0e\x65rror_category\x18\x04 \x01(\t\"%\n\x12req_client_connect\x12\x0f\n\x07\x61pi_key\x18\x01 \x01(\t\".\n\x12res_client_connect\x12\x18\n\x10\x61pi_key_accepted\x18\x01 \x01(\x08\"\x16\n\x08req_ping\x12\n\n\x02id\x18\x01 \x01(\r\"\x16\n\x08res_ping\x12\n\n\x02id\x18\x01 \x01(\r\"w\n\x13req_account_pending\x12\x10\n\x08\x61\x63\x63ounts\x18\x01 \x03(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\x12\x0e\n\x06source\x18\x03 \x01(\x08\x12/\n\tthreshold\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"A\n\x13res_account_pending\x12*\n\x07pending\x18\x01 \x03(\x0b\x32\x19.nano.api.account_pending\"\\\n\x0f\x61\x63\x63ount_pending\x12\x0f\n\x07\x61\x63\x63ount\x18\x01 \x01(\t\x12\x38\n\nblock_info\x18\x02 \x03(\x0b\x32$.nano.api.account_pending_block_info\"J\n\x1a\x61\x63\x63ount_pending_block_info\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x0e\n\x06\x61mount\x18\x02 \x01(\t\x12\x0e\n\x06source\x18\x03 \x01(\t*~\n\x0bRequestType\x12\x0b\n\x07INVALID\x10\x00\x12\x15\n\x11REGISTER_CALLBACK\x10\x01\x12\x08\n\x04PING\x10\x02\x12\x13\n\x0f\x41\x43\x43OUNT_BALANCE\x10\x03\x12\x17\n\x13\x41\x43\x43OUNT_BLOCK_COUNT\x10\x04\x12\x13\n\x0f\x41\x43\x43OUNT_PENDING\x10\x05\x62\x06proto3')
+  serialized_pb=_b('\n\ncore.proto\x12\x08nano.api\x1a\x1egoogle/protobuf/wrappers.proto\".\n\x07request\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\"r\n\x08response\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\x12\x12\n\nerror_code\x18\x02 \x01(\x11\x12\x15\n\rerror_message\x18\x03 \x01(\t\x12\x16\n\x0e\x65rror_category\x18\x04 \x01(\t\"\x16\n\x08req_ping\x12\n\n\x02id\x18\x01 \x01(\r\"\x16\n\x08res_ping\x12\n\n\x02id\x18\x01 \x01(\r\"w\n\x13req_account_pending\x12\x10\n\x08\x61\x63\x63ounts\x18\x01 \x03(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x04\x12\x0e\n\x06source\x18\x03 \x01(\x08\x12/\n\tthreshold\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"A\n\x13res_account_pending\x12*\n\x07pending\x18\x01 \x03(\x0b\x32\x19.nano.api.account_pending\"\\\n\x0f\x61\x63\x63ount_pending\x12\x0f\n\x07\x61\x63\x63ount\x18\x01 \x01(\t\x12\x38\n\nblock_info\x18\x02 \x03(\x0b\x32$.nano.api.account_pending_block_info\"J\n\x1a\x61\x63\x63ount_pending_block_info\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x0e\n\x06\x61mount\x18\x02 \x01(\t\x12\x0e\n\x06source\x18\x03 \x01(\t*K\n\nAPIVersion\x12\x13\n\x0fVERSION_INVALID\x10\x00\x12\x11\n\rVERSION_MAJOR\x10\x01\x12\x11\n\rVERSION_MINOR\x10\x00\x1a\x02\x10\x01*~\n\x0bRequestType\x12\x0b\n\x07INVALID\x10\x00\x12\x15\n\x11REGISTER_CALLBACK\x10\x01\x12\x08\n\x04PING\x10\x02\x12\x13\n\x0f\x41\x43\x43OUNT_BALANCE\x10\x03\x12\x17\n\x13\x41\x43\x43OUNT_BLOCK_COUNT\x10\x04\x12\x13\n\x0f\x41\x43\x43OUNT_PENDING\x10\x05\x62\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
+_APIVERSION = _descriptor.EnumDescriptor(
+  name='APIVersion',
+  full_name='nano.api.APIVersion',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='VERSION_INVALID', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VERSION_MAJOR', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VERSION_MINOR', index=2, number=0,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=_descriptor._ParseOptions(descriptor_pb2.EnumOptions(), _b('\020\001')),
+  serialized_start=626,
+  serialized_end=701,
+)
+_sym_db.RegisterEnumDescriptor(_APIVERSION)
+
+APIVersion = enum_type_wrapper.EnumTypeWrapper(_APIVERSION)
 _REQUESTTYPE = _descriptor.EnumDescriptor(
   name='RequestType',
   full_name='nano.api.RequestType',
@@ -58,12 +85,15 @@ _REQUESTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=713,
-  serialized_end=839,
+  serialized_start=703,
+  serialized_end=829,
 )
 _sym_db.RegisterEnumDescriptor(_REQUESTTYPE)
 
 RequestType = enum_type_wrapper.EnumTypeWrapper(_REQUESTTYPE)
+VERSION_INVALID = 0
+VERSION_MAJOR = 1
+VERSION_MINOR = 0
 INVALID = 0
 REGISTER_CALLBACK = 1
 PING = 2
@@ -156,68 +186,6 @@ _RESPONSE = _descriptor.Descriptor(
 )
 
 
-_REQ_CLIENT_CONNECT = _descriptor.Descriptor(
-  name='req_client_connect',
-  full_name='nano.api.req_client_connect',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='api_key', full_name='nano.api.req_client_connect.api_key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=220,
-  serialized_end=257,
-)
-
-
-_RES_CLIENT_CONNECT = _descriptor.Descriptor(
-  name='res_client_connect',
-  full_name='nano.api.res_client_connect',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='api_key_accepted', full_name='nano.api.res_client_connect.api_key_accepted', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=259,
-  serialized_end=305,
-)
-
-
 _REQ_PING = _descriptor.Descriptor(
   name='req_ping',
   full_name='nano.api.req_ping',
@@ -244,8 +212,8 @@ _REQ_PING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=307,
-  serialized_end=329,
+  serialized_start=220,
+  serialized_end=242,
 )
 
 
@@ -275,8 +243,8 @@ _RES_PING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=331,
-  serialized_end=353,
+  serialized_start=244,
+  serialized_end=266,
 )
 
 
@@ -327,8 +295,8 @@ _REQ_ACCOUNT_PENDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=355,
-  serialized_end=474,
+  serialized_start=268,
+  serialized_end=387,
 )
 
 
@@ -358,8 +326,8 @@ _RES_ACCOUNT_PENDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=476,
-  serialized_end=541,
+  serialized_start=389,
+  serialized_end=454,
 )
 
 
@@ -396,8 +364,8 @@ _ACCOUNT_PENDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=543,
-  serialized_end=635,
+  serialized_start=456,
+  serialized_end=548,
 )
 
 
@@ -441,8 +409,8 @@ _ACCOUNT_PENDING_BLOCK_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=637,
-  serialized_end=711,
+  serialized_start=550,
+  serialized_end=624,
 )
 
 _REQUEST.fields_by_name['type'].enum_type = _REQUESTTYPE
@@ -452,14 +420,13 @@ _RES_ACCOUNT_PENDING.fields_by_name['pending'].message_type = _ACCOUNT_PENDING
 _ACCOUNT_PENDING.fields_by_name['block_info'].message_type = _ACCOUNT_PENDING_BLOCK_INFO
 DESCRIPTOR.message_types_by_name['request'] = _REQUEST
 DESCRIPTOR.message_types_by_name['response'] = _RESPONSE
-DESCRIPTOR.message_types_by_name['req_client_connect'] = _REQ_CLIENT_CONNECT
-DESCRIPTOR.message_types_by_name['res_client_connect'] = _RES_CLIENT_CONNECT
 DESCRIPTOR.message_types_by_name['req_ping'] = _REQ_PING
 DESCRIPTOR.message_types_by_name['res_ping'] = _RES_PING
 DESCRIPTOR.message_types_by_name['req_account_pending'] = _REQ_ACCOUNT_PENDING
 DESCRIPTOR.message_types_by_name['res_account_pending'] = _RES_ACCOUNT_PENDING
 DESCRIPTOR.message_types_by_name['account_pending'] = _ACCOUNT_PENDING
 DESCRIPTOR.message_types_by_name['account_pending_block_info'] = _ACCOUNT_PENDING_BLOCK_INFO
+DESCRIPTOR.enum_types_by_name['APIVersion'] = _APIVERSION
 DESCRIPTOR.enum_types_by_name['RequestType'] = _REQUESTTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -476,20 +443,6 @@ response = _reflection.GeneratedProtocolMessageType('response', (_message.Messag
   # @@protoc_insertion_point(class_scope:nano.api.response)
   ))
 _sym_db.RegisterMessage(response)
-
-req_client_connect = _reflection.GeneratedProtocolMessageType('req_client_connect', (_message.Message,), dict(
-  DESCRIPTOR = _REQ_CLIENT_CONNECT,
-  __module__ = 'core_pb2'
-  # @@protoc_insertion_point(class_scope:nano.api.req_client_connect)
-  ))
-_sym_db.RegisterMessage(req_client_connect)
-
-res_client_connect = _reflection.GeneratedProtocolMessageType('res_client_connect', (_message.Message,), dict(
-  DESCRIPTOR = _RES_CLIENT_CONNECT,
-  __module__ = 'core_pb2'
-  # @@protoc_insertion_point(class_scope:nano.api.res_client_connect)
-  ))
-_sym_db.RegisterMessage(res_client_connect)
 
 req_ping = _reflection.GeneratedProtocolMessageType('req_ping', (_message.Message,), dict(
   DESCRIPTOR = _REQ_PING,
@@ -534,4 +487,6 @@ account_pending_block_info = _reflection.GeneratedProtocolMessageType('account_p
 _sym_db.RegisterMessage(account_pending_block_info)
 
 
+_APIVERSION.has_options = True
+_APIVERSION._options = _descriptor._ParseOptions(descriptor_pb2.EnumOptions(), _b('\020\001'))
 # @@protoc_insertion_point(module_scope)
