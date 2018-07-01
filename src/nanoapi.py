@@ -1,7 +1,8 @@
 # Python client to the Nano Node API
 # Tested with Python 2.7.13 and Python 3.6.5
 # Dependencies: Protobuf (Python 2 also needs 'future')
-import core_pb2 as Model
+import core_pb2 as Core
+import util_pb2 as Util
 import socket
 import sys
 import struct
@@ -14,6 +15,9 @@ from future.standard_library import install_aliases
 install_aliases()
 from urllib.parse import urlparse
 
+# Update this list if new proto files are added to the node
+proto_mods = [Core, Util]
+
 class Client:
     """Nano API client"""
     def __init__(self, conn):
@@ -21,11 +25,19 @@ class Client:
         self.conn = conn
 
         # Extract request types
-        #self.query_types = [v for v in  vars(Model).values() if isinstance(v, type) and issubclass(v, Message) and v.__name__.startswith("req_")]
+        #self.query_types = [v for v in  vars(Core).values() if isinstance(v, type) and issubclass(v, Message) and v.__name__.startswith("req_")]
         #for clazz in self.query_types:
         #    print (clazz.__name__)
         #    print (clazz.DESCRIPTOR.fields_by_name.keys())
         #    print ([f.type for f in clazz.DESCRIPTOR.fields])
+
+    def getattr_multi(self, objarray, symbol):
+        """Returns the attribute 'symbol' in any of the objects in objarray, or None if not found"""
+        for obj in objarray:
+            attr = getattr(obj, symbol, None)
+            if attr is not None:
+                return attr
+        return None
 
     def request(self, req_object):
         """Send request"""
@@ -33,15 +45,15 @@ class Client:
         undecorated = type(req_object).__name__[4:]
 
         # Get enum value and send req
-        req_id = getattr(Model, undecorated.upper())
+        req_id = getattr(Core, undecorated.upper())
         error, res = self.conn.send_request(req_id, req_object)
         if error is None:
             # Create result object
-            res_obj = getattr(Model, 'res_' + undecorated.lower())()
+            res_obj = self.getattr_multi(proto_mods, 'res_' + undecorated.lower())()
             res_obj.ParseFromString(res)
             return res_obj
         else:
-            err_obj = Model.response()
+            err_obj = Core.response()
             err_obj.ParseFromString(error)
             return err_obj
 
@@ -51,11 +63,11 @@ class Client:
 
     def from_json(self, req_name, json):
         """Create a req_<req_name> protobuf object and parse the supplied JSON into it"""
-        req_obj = getattr(Model, 'req_' + req_name.lower())()
+        req_obj = self.getattr_multi(proto_mods, 'req_' + req_name.lower())()
         return Parse(json, req_obj)
 
     def error_response_from_exception(self, ex):
-        err_obj = Model.response()
+        err_obj = Core.response()
         err_obj.error_code = 1
         err_obj.error_message = str(ex)
         err_obj.error_category = "exception"
@@ -96,11 +108,11 @@ class SocketConnection:
         """Serialize request and send via socket, deserialize and return result"""
         try:
             # Send preamble
-            preamble = bytearray([ord('N'),0, Model.VERSION_MAJOR, Model.VERSION_MINOR])
+            preamble = bytearray([ord('N'),0, Core.VERSION_MAJOR, Core.VERSION_MINOR])
             self.sock.sendall(preamble)
 
             # Request header
-            header = Model.request()
+            header = Core.request()
             header.type = request_type
             str_header = header.SerializeToString()
             str_request = request.SerializeToString()
@@ -115,7 +127,7 @@ class SocketConnection:
             preamble = self.recvall(self.sock, 4)
             if chr(preamble[0]) != 'N':
                 raise ValueError('Invalid preamble')
-            if int(preamble[2]) > Model.VERSION_MAJOR:
+            if int(preamble[2]) > Core.VERSION_MAJOR:
                 raise ValueError('Unsupport API version')
 
             # Get response header
@@ -125,7 +137,7 @@ class SocketConnection:
 
             response_buf = self.recvall(self.sock, header_len)
 
-            response = Model.response();
+            response = Core.response();
             response.ParseFromString(response_buf);
             #print >> sys.stderr, "Got response type: %d " % response.type
 
@@ -145,7 +157,7 @@ class SocketConnection:
                 return response_buf, None
 
         except Exception as msg:
-            response = Model.response()
+            response = Core.response()
             response.error_code = 1
             response.error_message = str(msg)
             return response.SerializeToString(), None

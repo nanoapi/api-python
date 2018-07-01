@@ -4,7 +4,7 @@
 import json
 import os.path
 from flask import Flask, request
-from nanoapi import (Client, SocketConnection, Model)
+from nanoapi import (Client, SocketConnection)
 
 app = Flask(__name__)
 global conn
