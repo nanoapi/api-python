@@ -2,6 +2,7 @@
 # Tested with Python 2.7.13 and Python 3.6.5
 # Dependencies: Protobuf (Python 2 also needs 'future')
 import core_pb2 as Core
+import accounts_pb2 as Accounts
 import util_pb2 as Util
 import socket
 import sys
@@ -16,7 +17,7 @@ install_aliases()
 from urllib.parse import urlparse
 
 # Update this list if new proto files are added to the node
-proto_mods = [Core, Util]
+proto_mods = [Core, Accounts, Util]
 
 class Client:
     """Nano API client"""
