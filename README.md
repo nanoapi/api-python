@@ -77,8 +77,3 @@ When the protobuffer definition has changed, run the following command to fetch 
 ```
 ci/protobuf-gen.sh
 ```
-
-If new .proto files are added, update `nanoapi.py` like this:
-
-* Add the corresponding import
-* Update the `proto_mods` array by adding the import alias.
