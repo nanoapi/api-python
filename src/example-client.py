@@ -1,4 +1,5 @@
-from nanoapi import (Client, SocketConnection, Accounts)
+from nanoapi import (Client, SocketConnection)
+import accounts_pb2 as Accounts
 
 # Domain socket. On multiuser systems, the directory can be protected to allow only specific users.
 # Replace the connection string with, say, tcp://localhost:7077 to use TPC.
@@ -6,7 +7,7 @@ conn = SocketConnection('local:///tmp/nano')
 nano = Client(conn)
 
 pending = Accounts.req_account_pending();
-pending.threshold.value = "106370018000000000000000000000000";
+pending.threshold.value = "100000000000000000000000000000000";
 pending.source = True;
 pending.count = 10
 pending.accounts.append("xrb_1111111111111111111111111111111111111111111111111111hifc8npp");

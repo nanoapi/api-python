@@ -15,6 +15,8 @@ def api(query):
 
     try:
         query_obj = nano.from_json(query, request.data)
+        if query_obj == None:
+            return nano.to_json(nano.error_response(1, "Invalid message"))
         res = nano.request(query_obj)
         return nano.to_json(res)
     except Exception as e:

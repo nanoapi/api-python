@@ -1,9 +1,8 @@
-# Python client to the Nano Node API
+# Python client for the Nano Node API
 # Tested with Python 2.7.13 and Python 3.6.5
-# Dependencies: Protobuf (Python 2 also needs 'future')
+import glob
+import os
 import core_pb2 as Core
-import accounts_pb2 as Accounts
-import util_pb2 as Util
 import socket
 import sys
 import struct
@@ -16,8 +15,19 @@ from future.standard_library import install_aliases
 install_aliases()
 from urllib.parse import urlparse
 
-# Update this list if new proto files are added to the node
-proto_modules = [Core, Accounts, Util]
+proto_modules = [Core]
+
+# Dynamically import all proto-generated modules
+proto_files = glob.glob('**/*_pb2.py')
+for proto_file in proto_files:
+    basename = os.path.basename(proto_file)
+    noext = basename[:-3]
+
+    # Already imported
+    if noext != "core_pb2":
+        proto_mod = basename[:-7].capitalize()
+        imported = __import__(noext)
+        proto_modules.append(imported) 
 
 class Client:
     """Nano API client"""
@@ -64,10 +74,22 @@ class Client:
 
     def from_json(self, req_name, json):
         """Create a req_<req_name> protobuf object and parse the supplied JSON into it"""
-        req_obj = self.getattr_multi(proto_modules, 'req_' + req_name.lower())()
-        return Parse(json, req_obj)
+        msg = self.getattr_multi(proto_modules, 'req_' + req_name.lower())
+        if msg != None:
+            return Parse(json, msg())
+        else:
+            return None
+
+    def error_response(self, code, message):
+        """Create an error response given an error code and message"""
+        err_obj = Core.response()
+        err_obj.error_code = code
+        err_obj.error_message = message
+        err_obj.error_category = "generic"
+        return err_obj
 
     def error_response_from_exception(self, ex):
+        """Create an error response given an exception. The error code is set to 1."""
         err_obj = Core.response()
         err_obj.error_code = 1
         err_obj.error_message = str(ex)
@@ -134,13 +156,10 @@ class SocketConnection:
             # Get response header
             response_buf = self.recvall(self.sock, 4)
             header_len = struct.unpack('>i', response_buf[:4])[0]
-            #print >> sys.stderr, "Got response header length: %d " % header_len
 
             response_buf = self.recvall(self.sock, header_len)
-
             response = Core.response();
             response.ParseFromString(response_buf);
-            #print >> sys.stderr, "Got response type: %d " % response.type
 
             if response.error_code == 0:
                 # Length of response
