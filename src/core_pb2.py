@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='core.proto',
   package='nano.api',
   syntax='proto3',
-  serialized_pb=_b('\n\ncore.proto\x12\x08nano.api\x1a\x1egoogle/protobuf/wrappers.proto\".\n\x07request\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\"r\n\x08response\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\x12\x12\n\nerror_code\x18\x02 \x01(\x11\x12\x15\n\rerror_message\x18\x03 \x01(\t\x12\x16\n\x0e\x65rror_category\x18\x04 \x01(\t\"\x16\n\x08req_ping\x12\n\n\x02id\x18\x01 \x01(\r\"\x16\n\x08res_ping\x12\n\n\x02id\x18\x01 \x01(\r*K\n\nAPIVersion\x12\x13\n\x0fVERSION_INVALID\x10\x00\x12\x11\n\rVERSION_MAJOR\x10\x01\x12\x11\n\rVERSION_MINOR\x10\x00\x1a\x02\x10\x01*\x92\x01\n\x0bRequestType\x12\x0b\n\x07INVALID\x10\x00\x12\x15\n\x11REGISTER_CALLBACK\x10\x01\x12\x08\n\x04PING\x10\x02\x12\x13\n\x0f\x41\x43\x43OUNT_BALANCE\x10\x03\x12\x17\n\x13\x41\x43\x43OUNT_BLOCK_COUNT\x10\x04\x12\x13\n\x0f\x41\x43\x43OUNT_PENDING\x10\x05\x12\x12\n\rADDRESS_VALID\x10\xe8\x07\x62\x06proto3')
+  serialized_pb=_b('\n\ncore.proto\x12\x08nano.api\x1a\x1egoogle/protobuf/wrappers.proto\".\n\x07request\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\"r\n\x08response\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.nano.api.RequestType\x12\x12\n\nerror_code\x18\x02 \x01(\x11\x12\x15\n\rerror_message\x18\x03 \x01(\t\x12\x16\n\x0e\x65rror_category\x18\x04 \x01(\t\"\x16\n\x08req_ping\x12\n\n\x02id\x18\x01 \x01(\r\"\x16\n\x08res_ping\x12\n\n\x02id\x18\x01 \x01(\r*K\n\nAPIVersion\x12\x13\n\x0fVERSION_INVALID\x10\x00\x12\x11\n\rVERSION_MAJOR\x10\x01\x12\x11\n\rVERSION_MINOR\x10\x00\x1a\x02\x10\x01*d\n\x0bRequestType\x12\x0b\n\x07INVALID\x10\x00\x12\x15\n\x11REGISTER_CALLBACK\x10\x01\x12\x08\n\x04PING\x10\x02\x12\x13\n\x0f\x41\x43\x43OUNT_PENDING\x10\x64\x12\x12\n\rADDRESS_VALID\x10\xe8\x07\x62\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -71,26 +71,18 @@ _REQUESTTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ACCOUNT_BALANCE', index=3, number=3,
+      name='ACCOUNT_PENDING', index=3, number=100,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ACCOUNT_BLOCK_COUNT', index=4, number=4,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ACCOUNT_PENDING', index=5, number=5,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ADDRESS_VALID', index=6, number=1000,
+      name='ADDRESS_VALID', index=4, number=1000,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=346,
-  serialized_end=492,
+  serialized_start=345,
+  serialized_end=445,
 )
 _sym_db.RegisterEnumDescriptor(_REQUESTTYPE)
 
@@ -101,9 +93,7 @@ VERSION_MINOR = 0
 INVALID = 0
 REGISTER_CALLBACK = 1
 PING = 2
-ACCOUNT_BALANCE = 3
-ACCOUNT_BLOCK_COUNT = 4
-ACCOUNT_PENDING = 5
+ACCOUNT_PENDING = 100
 ADDRESS_VALID = 1000
 
 
