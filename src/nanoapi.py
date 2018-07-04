@@ -17,7 +17,7 @@ install_aliases()
 from urllib.parse import urlparse
 
 # Update this list if new proto files are added to the node
-proto_mods = [Core, Accounts, Util]
+proto_modules = [Core, Accounts, Util]
 
 class Client:
     """Nano API client"""
@@ -50,7 +50,7 @@ class Client:
         error, res = self.conn.send_request(req_id, req_object)
         if error is None:
             # Create result object
-            res_obj = self.getattr_multi(proto_mods, 'res_' + undecorated.lower())()
+            res_obj = self.getattr_multi(proto_modules, 'res_' + undecorated.lower())()
             res_obj.ParseFromString(res)
             return res_obj
         else:
@@ -64,7 +64,7 @@ class Client:
 
     def from_json(self, req_name, json):
         """Create a req_<req_name> protobuf object and parse the supplied JSON into it"""
-        req_obj = self.getattr_multi(proto_mods, 'req_' + req_name.lower())()
+        req_obj = self.getattr_multi(proto_modules, 'req_' + req_name.lower())()
         return Parse(json, req_obj)
 
     def error_response_from_exception(self, ex):
