@@ -4,7 +4,7 @@
 import json
 import os.path
 from flask import Flask, request
-from nanoapi import (Client, SocketConnection)
+from nanoapi import (Session, SocketConnection)
 
 app = Flask(__name__)
 global conn
@@ -35,11 +35,11 @@ if __name__ == '__main__':
             config_connection = json_data['node']['connection']
 
     conn = SocketConnection(config_connection)
-    nano = Client(conn)
+    nano = Session(conn)
 
     # If config port is zero, we're hosted in a production quality web server,
     # otherwise, start a debug server.
     if config_port == 0:
         app.run()
     else:
-        app.run(debug=True, port=config_port)
+        app.run(debug=True, port=config_port, threaded=True)

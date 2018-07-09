@@ -14,6 +14,7 @@ from builtins import bytes
 from future.standard_library import install_aliases
 install_aliases()
 from urllib.parse import urlparse
+from threading import Lock
 
 proto_modules = [Core]
 
@@ -29,11 +30,12 @@ for proto_file in proto_files:
         imported = __import__(noext)
         proto_modules.append(imported) 
 
-class Client:
-    """Nano API client"""
+class Session:
+    """A node session """
     def __init__(self, conn):
         """Initialize client with an IPC connection. The connection object must provide send_request method"""
         self.conn = conn
+        self.lock = Lock()
 
         # Extract request types
         #self.query_types = [v for v in  vars(Core).values() if isinstance(v, type) and issubclass(v, Message) and v.__name__.startswith("req_")]
@@ -51,22 +53,26 @@ class Client:
         return None
 
     def request(self, req_object):
-        """Send request"""
-        # Strip off the 'req_' prefix
-        undecorated = type(req_object).__name__[4:]
+        self.lock.acquire()
+        try:
+            """Send request"""
+            # Strip off the 'req_' prefix
+            undecorated = type(req_object).__name__[4:]
 
-        # Get enum value and send req
-        req_id = getattr(Core, undecorated.upper())
-        error, res = self.conn.send_request(req_id, req_object)
-        if error is None:
-            # Create result object
-            res_obj = self.getattr_multi(proto_modules, 'res_' + undecorated.lower())()
-            res_obj.ParseFromString(res)
-            return res_obj
-        else:
-            err_obj = Core.response()
-            err_obj.ParseFromString(error)
-            return err_obj
+            # Get enum value and send req
+            req_id = getattr(Core, undecorated.upper())
+            error, res = self.conn.send_request(req_id, req_object)
+            if error is None:
+                # Create result object
+                res_obj = self.getattr_multi(proto_modules, 'res_' + undecorated.lower())()
+                res_obj.ParseFromString(res)
+                return res_obj
+            else:
+                err_obj = Core.response()
+                err_obj.ParseFromString(error)
+                return err_obj
+        finally:
+            self.lock.release()
 
     def to_json(self, obj):
         """Convert the protobuf object to JSON"""
