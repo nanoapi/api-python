@@ -2,4 +2,4 @@ Flask==1.0.2
 future==0.16.0
 google==2.0.1
 protobuf==3.5.1
-urllib3==1.22
+urllib3==1.26.5
